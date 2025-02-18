@@ -12,18 +12,21 @@
         <textarea id="contestantInput" placeholder="Paste items here!"></textarea>
         <br>
         <input type="file" id="fileInput" accept=".txt">
-        <button onclick="loadFile()" class="button">Load from File</button>
-        <button onclick="startSorting()" class="button">Start</button>
+        <button id="loadButton" class="button">Load from File</button>
+        <button id="startButton" class="button">Start</button>
+        
+        <!-- Sorting buttons -->
         <div id="sorting" style="display: none;">
             <h2>Which do you prefer?</h2>
-            <button id="option1" class="button" onclick="choose(1)">Option 1</button>
-            <button id="option2" class="button" onclick="choose(2)">Option 2</button>
-            <p id="progress"></p>
+            <button id="option1" class="button"></button>
+            <button id="option2" class="button"></button>
         </div>
+
+        <!-- Final result section -->
         <div id="result" style="display: none;">
             <h2>Final Ranking</h2>
             <ol id="ranking"></ol>
-            <button onclick="resetSorter()" class="button">Restart</button>
+            <button id="restartButton" class="button" style="display: none;">Restart</button> <!-- Restart button initially hidden -->
         </div>
     </div>
     <script src="script.js"></script>
