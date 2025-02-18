@@ -62,5 +62,5 @@ function showResults() {
     document.getElementById("result").style.display = "block";
     let sorted = Object.entries(results).sort((a, b) => b[1] - a[1]);
     let rankingList = document.getElementById("ranking");
-    rankingList.innerHTML = sorted.map(([name]) => `<li>${name}</li>`).join('');
+    rankingList.innerHTML = sorted.map(([name], i) => `<li>${i + 1}. ${name}</li>`).join('');
 }
