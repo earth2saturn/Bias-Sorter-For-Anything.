@@ -21,13 +21,25 @@ function startSorting() {
     
     document.getElementById("contestantInput").style.display = "none";
     document.getElementById("fileInput").style.display = "none";
-    document.querySelector("button[onclick='startSorting()']").style.display = "none";
+    document.getElementById("loadButton").style.display = "none";
+    document.getElementById("startButton").style.display = "none";
     document.getElementById("sorting").style.display = "block";
+    document.getElementById("restartButton").style.display = "block"; // Show restart button immediately
     
     results = Object.fromEntries(contestants.map(c => [c, 0]));
     comparisons = generatePairs(contestants);
     index = 0;
     showNextComparison();
+}
+
+function resetSorter() {
+    document.getElementById("contestantInput").style.display = "block";
+    document.getElementById("fileInput").style.display = "block";
+    document.getElementById("loadButton").style.display = "block";
+    document.getElementById("startButton").style.display = "block";
+    document.getElementById("result").style.display = "none";
+    document.getElementById("restartButton").style.display = "none"; // Hide restart button
+    document.getElementById("contestantInput").value = "";
 }
 
 function generatePairs(arr) {
