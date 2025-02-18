@@ -17,7 +17,7 @@ function loadFile() {
 
 function startSorting() {
     contestants = document.getElementById("contestantInput").value.trim().split("\n").map(s => s.trim()).filter(Boolean);
-    if (contestants.length < 2) { alert("Enter at least two contestants."); return; }
+    if (contestants.length < 2) { alert("Enter at least two items!"); return; }
     
     document.getElementById("contestantInput").style.display = "none";
     document.getElementById("fileInput").style.display = "none";
