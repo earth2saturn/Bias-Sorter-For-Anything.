@@ -17,11 +17,11 @@ function loadFile() {
 
 function startSorting() {
     contestants = document.getElementById("contestantInput").value.trim().split("\n").map(s => s.trim()).filter(Boolean);
-    if (contestants.length < 2) { alert("Enter at least two items!"); return; }
+    if (contestants.length < 2) { alert("Enter at least two contestants."); return; }
     
     document.getElementById("contestantInput").style.display = "none";
     document.getElementById("fileInput").style.display = "none";
-    document.querySelectorAll(".button").forEach(btn => btn.style.display = "none");
+    document.querySelector("button[onclick='startSorting()']").style.display = "none";
     document.getElementById("sorting").style.display = "block";
     
     results = Object.fromEntries(contestants.map(c => [c, 0]));
@@ -48,7 +48,6 @@ function showNextComparison() {
     let [a, b] = comparisons[index];
     document.getElementById("option1").innerText = a;
     document.getElementById("option2").innerText = b;
-    document.getElementById("progress").innerText = `Comparison ${index + 1} of ${comparisons.length}`;
 }
 
 function choose(choice) {
@@ -65,9 +64,3 @@ function showResults() {
     let rankingList = document.getElementById("ranking");
     rankingList.innerHTML = sorted.map(([name], i) => `<li>${i + 1}. ${name}</li>`).join('');
 }
-
-function resetSorter() {
-    document.getElementById("contestantInput").style.display = "block";
-    document.getElement
-::contentReference[oaicite:3]{index=3}
- 
