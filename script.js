@@ -16,30 +16,27 @@ function loadFile() {
 }
 
 function startSorting() {
-    contestants = document.getElementById("contestantInput").value.trim().split("\n").map(s => s.trim()).filter(Boolean);
+    contestants = sanitizeInput(document.getElementById("contestantInput").value);
     if (contestants.length < 2) { alert("Enter at least two contestants."); return; }
     
-    document.getElementById("contestantInput").style.display = "none";
-    document.getElementById("fileInput").style.display = "none";
-    document.getElementById("loadButton").style.display = "none";
-    document.getElementById("startButton").style.display = "none";
-    document.getElementById("sorting").style.display = "block";
-    document.getElementById("restartButton").style.display = "block"; // Show restart button immediately
-    
+    showSortingPage();
     results = Object.fromEntries(contestants.map(c => [c, 0]));
     comparisons = generatePairs(contestants);
     index = 0;
     showNextComparison();
 }
 
-function resetSorter() {
-    document.getElementById("contestantInput").style.display = "block";
-    document.getElementById("fileInput").style.display = "block";
-    document.getElementById("loadButton").style.display = "block";
-    document.getElementById("startButton").style.display = "block";
-    document.getElementById("result").style.display = "none";
-    document.getElementById("restartButton").style.display = "none"; // Hide restart button
-    document.getElementById("contestantInput").value = "";
+function sanitizeInput(input) {
+    return input.trim().split("\n").map(s => s.trim()).filter(Boolean);
+}
+
+function showSortingPage() {
+    document.getElementById("contestantInput").classList.add("hidden");
+    document.getElementById("fileInput").classList.add("hidden");
+    document.getElementById("loadButton").classList.add("hidden");
+    document.getElementById("startButton").classList.add("hidden");
+    document.getElementById("sorting").classList.remove("hidden");
+    document.getElementById("restartButton").classList.remove("hidden");
 }
 
 function generatePairs(arr) {
@@ -58,16 +55,32 @@ function showNextComparison() {
         return;
     }
     let [a, b] = comparisons[index];
-    console.log("Showing comparison:", a, b); // Debugging line
     document.getElementById("option1").innerText = a;
     document.getElementById("option2").innerText = b;
 }
 
 function choose(choice) {
-    console.log("Chosen option:", choice); // Debugging line
     let [a, b] = comparisons[index];
     results[choice === 1 ? a : b]++;
     index++;
     showNextComparison();
+}
+
+function showResults() {
+    document.getElementById("sorting").classList.add("hidden");
+    document.getElementById("result").classList.remove("hidden");
+    let sorted = Object.entries(results).sort((a, b) => b[1] - a[1]);
+    let rankingList = document.getElementById("ranking");
+    rankingList.innerHTML = sorted.map(([name], i) => `<li>${i + 1}. ${name}</li>`).join('');
+}
+
+function resetSorter() {
+    document.getElementById("contestantInput").classList.remove("hidden");
+    document.getElementById("fileInput").classList.remove("hidden");
+    document.getElementById("loadButton").classList.remove("hidden");
+    document.getElementById("startButton").classList.remove("hidden");
+    document.getElementById("result").classList.add("hidden");
+    document.getElementById("restartButton").classList.add("hidden");
+    document.getElementById("contestantInput").value = "";
 }
 
