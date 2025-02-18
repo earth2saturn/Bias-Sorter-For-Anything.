@@ -46,21 +46,16 @@ function showNextComparison() {
         return;
     }
     let [a, b] = comparisons[index];
+    console.log("Showing comparison:", a, b); // Debugging line
     document.getElementById("option1").innerText = a;
     document.getElementById("option2").innerText = b;
 }
 
 function choose(choice) {
+    console.log("Chosen option:", choice); // Debugging line
     let [a, b] = comparisons[index];
     results[choice === 1 ? a : b]++;
     index++;
     showNextComparison();
 }
 
-function showResults() {
-    document.getElementById("sorting").style.display = "none";
-    document.getElementById("result").style.display = "block";
-    let sorted = Object.entries(results).sort((a, b) => b[1] - a[1]);
-    let rankingList = document.getElementById("ranking");
-    rankingList.innerHTML = sorted.map(([name], i) => `<li>${i + 1}. ${name}</li>`).join('');
-}
